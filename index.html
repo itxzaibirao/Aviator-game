@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Aviator God Mode</title>
+<style>
+body{margin:0;background:#000;color:#fff;text-align:center;font-family:Arial}
+#multiplier{font-size:60px;color:#00ffcc;margin-top:50px}
+button{padding:10px 15px;margin:5px;background:#00ffcc;border:none}
+</style>
+</head>
+<body>
+
+<h1>AVIATOR GOD MODE</h1>
+<p>Powered by ZOHAIB</p>
+
+<div id="multiplier">1.00x</div>
+
+<button onclick="cashout()">Cash Out</button>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+
+socket.on("multiplier", (m) => {
+  document.getElementById("multiplier").innerText = m + "x";
+});
+
+socket.on("crash", (m) => {
+  alert("CRASH at " + m + "x");
+});
+
+function cashout(){
+  socket.emit("cashout");
+}
+</script>
+
+</body>
+</html>
